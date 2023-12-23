@@ -1,12 +1,7 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "NeomaTask/index.js",
-        "use": "@now/node"
+    "functions": {
+      "api/**/*.js": {
+        "runtime": "nodejs16"
       }
-    ],
-    "routes": [
-      { "src": "/(.*)", "dest": "NeomaTask/Index.js" }
-    ]
+    }
   }
