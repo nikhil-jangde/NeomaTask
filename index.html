@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .api-section {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+
+    .endpoint {
+      margin-bottom: 10px;
+    }
+
+    .endpoint-url {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .actual-url {
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 5px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .copy-button {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .copy-success {
+      color: #4CAF50;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>API Documentation</h1>
+
+  <div class="api-section">
+    <h2>1. User Registration and Login</h2>
+
+    <div class="endpoint">
+      <div class="endpoint-url">POST /register</div>
+      <div class="actual-url" id="actualUrlRegister">http://localhost:5000/register</div>
+      <button class="copy-button" onclick="copyToClipboard('/register')">Copy</button>
+      <span class="copy-success" id="copySuccessRegister"></span>
+    </div>
+
+    <div class="endpoint">
+      <div class="endpoint-url">POST /login</div>
+      <div class="actual-url" id="actualUrlLogin"></div>
+      <button class="copy-button" onclick="copyToClipboard('/login')">Copy</button>
+      <span class="copy-success" id="copySuccessLogin"></span>
+    </div>
+  </div>
+
+  <div class="api-section">
+    <h2>2. Blog Post CRUD Operations</h2>
+
+    <div class="endpoint">
+      <div class="endpoint-url">POST /blog</div>
+      <div class="actual-url" id="actualUrlBlogPost"></div>
+      <button class="copy-button" onclick="copyToClipboard('/blog')">Copy</button>
+      <span class="copy-success" id="copySuccessBlogPost"></span>
+    </div>
+
+    <div class="endpoint">
+      <div class="endpoint-url">GET /blog</div>
+      <div class="actual-url" id="actualUrlGetBlog"></div>
+      <button class="copy-button" onclick="copyToClipboard('/blog')">Copy</button>
+      <span class="copy-success" id="copySuccessGetBlog"></span>
+    </div>
+
+    <div class="endpoint">
+      <div class="endpoint-url">PUT /blog/:id</div>
+      <div class="actual-url" id="actualUrlUpdateBlog"></div>
+      <button class="copy-button" onclick="copyToClipboard('/blog/:id')">Copy</button>
+      <span class="copy-success" id="copySuccessUpdateBlog"></span>
+    </div>
+
+    <div class="endpoint">
+      <div class="endpoint-url">DELETE /blog/:id</div>
+      <div class="actual-url" id="actualUrlDeleteBlog"></div>
+      <button class="copy-button" onclick="copyToClipboard('/blog/:id')">Copy</button>
+      <span class="copy-success" id="copySuccessDeleteBlog"></span>
+    </div>
+  </div>
+
+  <div class="api-section">
+    <h2>3. Search Functionality</h2>
+
+    <div class="endpoint">
+      <div class="endpoint-url">GET /blog/search?title={searchTerm}</div>
+      <div class="actual-url" id="actualUrlSearch"></div>
+      <button class="copy-button" onclick="copyToClipboard('/blog/search?title={searchTerm}')">Copy</button>
+      <span class="copy-success" id="copySuccessSearch"></span>
+    </div>
+  </div>
+
+  <script>
+    function copyToClipboard(endpoint) {
+      const baseUrl = window.location.origin;
+      const fullUrl = baseUrl + endpoint;
+
+      navigator.clipboard.writeText(fullUrl).then(() => {
+        // Display the actual URL below the endpoint
+        const actualUrlElementId = 'actualUrl' + endpoint.replace(/\W/g, '');
+        const actualUrlElement = document.getElementById(actualUrlElementId);
+        actualUrlElement.textContent = 'Actual URL: ' + fullUrl;
+
+// Display copy success message
+const copySuccessElementId = 'copySuccess' + endpoint.replace(/\W/g, '');
+const copySuccessElement = document.getElementById(copySuccessElementId);
+copySuccessElement.innerHTML = 'Copied!';
+
+// Clear copy success and actual URL messages after 2 seconds
+setTimeout(() => {
+  copySuccessElement.innerHTML = '';
+  actualUrlElement.innerHTML = '';
+}, 2000);
+
+      }).catch((err) => {
+        console.error('Error copying to clipboard:', err);
+      });
+    }
+  </script>
+</body>
+</html>

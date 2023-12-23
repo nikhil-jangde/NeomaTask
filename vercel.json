@@ -1,0 +1,12 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "NeomaTask/index.js",
+        "use": "@now/node"
+      }
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "NeomaTask/Index.js" }
+    ]
+  }
